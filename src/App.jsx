@@ -3,12 +3,12 @@ import './App.css';
 import { getAllPokemon, getPoke } from './utils/data';
 import Card from './components/Card';
 
-const App:React.FC = () => {
+const App = () => {
     const pokeApiURL = 'https://pokeapi.co/api/v2/pokemon'
-    const [pokeData,setPokeData]:any = useState([])
+    const [pokeData,setPokeData] = useState([])
     useLayoutEffect (() => {
         const fetchPokeData = async () => {
-            let res:any = await getAllPokemon(pokeApiURL)
+            let res = await getAllPokemon(pokeApiURL)
             loadPoke(res.results)
         }
         fetchPokeData()
