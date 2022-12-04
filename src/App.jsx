@@ -2,6 +2,7 @@ import { useLayoutEffect, useState } from 'react';
 import './App.css';
 import { getAllPokemon, getPoke } from './utils/data';
 import Card from './components/Card/Card';
+import Navbar from './components/Navbar/navbar';
 
 const App = () => {
     const pokeApiURL = 'https://pokeapi.co/api/v2/pokemon'
@@ -26,14 +27,16 @@ const App = () => {
     }
     console.log(pokeData)
     return (
+    <>
+      <Navbar />
       <div className="App">
-        <h1>ポケモンのデータを取得しました</h1>
         <div className="cardContainer">
             {pokeData.map((poke,i) => {
                 return <Card key={i} poke={poke} /> 
             })}
         </div>
       </div>
+    </>
     );
 }
 
