@@ -1,7 +1,7 @@
 import { useLayoutEffect, useState } from 'react';
 import './App.css';
 import { getAllPokemon, getPoke } from './utils/data';
-import Card from './components/Card';
+import Card from './components/Card/Card';
 
 const App = () => {
     const pokeApiURL = 'https://pokeapi.co/api/v2/pokemon'
