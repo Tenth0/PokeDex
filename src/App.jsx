@@ -7,10 +7,14 @@ import Navbar from './components/Navbar/navbar';
 const App = () => {
     const pokeApiURL = 'https://pokeapi.co/api/v2/pokemon'
     const [pokeData,setPokeData] = useState([])
+    const [nextURL,setNextURL] = useState('')
+    const [prevURL,setPrevURL] = useState('')
     useLayoutEffect (() => {
         const fetchPokeData = async () => {
             let res = await getAllPokemon(pokeApiURL)
             loadPoke(res.results)
+            setNextURL(res.next)
+            setPrevURL(res.previous)
         }
         fetchPokeData()
     },[])
@@ -25,7 +29,22 @@ const App = () => {
         )
         setPokeData(_pokeData)   
     }
-    console.log(pokeData)
+
+    const handleNextPage = async () => {
+        let data = await getAllPokemon(nextURL)
+        await loadPoke(data.results)
+        setPrevURL(data.previous)
+        setNextURL(data.next)
+    }
+
+    const handlePrevPage = async () => {
+        if(!prevURL) return;
+        let data = await getAllPokemon(prevURL)
+        await loadPoke(data.results)
+        setPrevURL(data.previous)
+        setNextURL(data.next)
+    }
+
     return (
     <>
       <Navbar />
@@ -35,6 +54,10 @@ const App = () => {
                 return <Card key={i} poke={poke} /> 
             })}
         </div>
+      <div className="btn">
+        <button onClick={handlePrevPage}>前へ</button>
+        <button onClick={handleNextPage}>次へ</button>
+      </div>
       </div>
     </>
     );

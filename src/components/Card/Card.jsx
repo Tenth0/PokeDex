@@ -9,9 +9,9 @@ const Card = ({poke}) => {
       </div>
       <div className="name">{poke.name}</div>
         <div>タイプ</div>
-        {poke.types.map((type) => {
+        {poke.types.map((type,i) => {
           return (
-            <div className='typeName' key={type}>
+            <div className='typeName' key={i}>
               <span>{type.type.name}</span>
             </div>
           )
